@@ -1,0 +1,11 @@
+<form action="{% url 'login_user' %}" method="post">
+
+    {{ form.as_p }}
+
+    <div>
+        <button>Register</button>
+        or
+        <a href="{% url 'login_user' %}">Login</a>
+    </div>
+    {% csrf_token %}
+</form>

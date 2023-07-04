@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Create your account</h1>
+<form action="signup-page.html" method="post">
+    {{ form.as_p }}
+    {% csrf_token %}
+    <button>Create account</button>
+</form>
+</body>
+</html>
