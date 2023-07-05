@@ -1,6 +1,9 @@
+from enum import Enum
+
 from django.core import validators
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.contrib.auth import models as auth_models
 
 
 # # Charities Model:
@@ -101,17 +104,33 @@ def validate_only_alphanumeric(value):
             raise ValidationError("Ensure this value contains only letters, numbers, and underscore.")
 
 
-class Users(models.Model):
-    MIN_LEN_NAME = 2
-    MAX_LEN_NAME = 20
-    MAX_LEN_PASSWORD = 30
-    MAX_LEN_USER_TYPE = 30
+class ChoicesMixin:
+    @classmethod
+    def choices(cls):
+        return [(choice.name, choice.value) for choice in cls]
 
-    USER_TYPE_CHOICES = (
-        ("1", "Sponsor"),
-        ("1", "Benefactor"),
-        ("1", "Helper"),
-    )
+
+class ChoicesStringsMixin(ChoicesMixin):
+    @classmethod
+    def max_length(cls):
+        return max(len(x.value) for x in cls)
+
+
+class Gender(ChoicesStringsMixin, Enum):
+    MALE = 'Male'
+    FEMALE = 'Female'
+    DO_NOT_SHOW = 'Do not show'
+
+
+class UserType(ChoicesStringsMixin, Enum):
+    SPONSOR = "Sponsor"
+    BENEFACTOR = "Benefactor"
+    HELPER = "Helper"
+
+
+class CharityUser(auth_models.AbstractUser):
+    MIN_LEN_NAME = 2
+    MAX_LEN_NAME = 30
 
     first_name = models.CharField(
         max_length=MAX_LEN_NAME,
@@ -122,6 +141,7 @@ class Users(models.Model):
         null=False,
         blank=False,
     )
+
     last_name = models.CharField(
         max_length=MAX_LEN_NAME,
         validators=(
@@ -130,38 +150,85 @@ class Users(models.Model):
         null=False,
         blank=False,
     )
-    username = models.CharField(
-        max_length=MAX_LEN_NAME,
-        unique=True,
-        validators=(
-            validators.MinLengthValidator(MIN_LEN_NAME),
-            validate_only_alphanumeric,
-        ),
-        null=False,
-        blank=False,
-    )
+
     email = models.EmailField(
+        unique=True,
         null=False,
         blank=False,
     )
-    password = models.CharField(
-        max_length=MAX_LEN_PASSWORD,
-        null=False,
-        blank=False,
+
+    gender = models.CharField(
+        max_length=Gender.max_length(),
+        choices=Gender.choices()
     )
-    # Check that
+
     user_type = models.CharField(
-        max_length=MAX_LEN_USER_TYPE,
-        choices=USER_TYPE_CHOICES,
+        max_length=UserType.max_length(),
+        choices=UserType.choices(),
     )
-    # Do I really need this field???
-    interests = models.TextField()
 
-    def full_name(self):
-        return f"{self.first_name} {self.last_name}"
 
-    def __str__(self):
-        return self.full_name()
+# class Users(models.Model):
+#     MIN_LEN_NAME = 2
+#     MAX_LEN_NAME = 20
+#     MAX_LEN_PASSWORD = 30
+#     MAX_LEN_USER_TYPE = 30
+#
+#     USER_TYPE_CHOICES = (
+#         ("1", "Sponsor"),
+#         ("1", "Benefactor"),
+#         ("1", "Helper"),
+#     )
+#
+#     first_name = models.CharField(
+#         max_length=MAX_LEN_NAME,
+#         validators=(
+#             validators.MinLengthValidator(MIN_LEN_NAME),
+#         ),
+#         # Required field
+#         null=False,
+#         blank=False,
+#     )
+#     last_name = models.CharField(
+#         max_length=MAX_LEN_NAME,
+#         validators=(
+#             validators.MinLengthValidator(MIN_LEN_NAME),
+#         ),
+#         null=False,
+#         blank=False,
+#     )
+#     username = models.CharField(
+#         max_length=MAX_LEN_NAME,
+#         unique=True,
+#         validators=(
+#             validators.MinLengthValidator(MIN_LEN_NAME),
+#             validate_only_alphanumeric,
+#         ),
+#         null=False,
+#         blank=False,
+#     )
+#     email = models.EmailField(
+#         null=False,
+#         blank=False,
+#     )
+#     password = models.CharField(
+#         max_length=MAX_LEN_PASSWORD,
+#         null=False,
+#         blank=False,
+#     )
+#     # Check that
+#     user_type = models.CharField(
+#         max_length=MAX_LEN_USER_TYPE,
+#         choices=USER_TYPE_CHOICES,
+#     )
+#     # Do I really need this field???
+#     interests = models.TextField()
+#
+#     def full_name(self):
+#         return f"{self.first_name} {self.last_name}"
+#
+#     def __str__(self):
+#         return self.full_name()
 
 
 # SponsorsProfiles Model:
@@ -200,7 +267,7 @@ class SponsorsProfiles(models.Model):
     )
 
     sponsor = models.OneToOneField(
-        Users,
+        CharityUser,
         on_delete=models.CASCADE,
         primary_key=True,
     )
@@ -227,7 +294,7 @@ class SponsorsProfiles(models.Model):
 # For every person
 class BenefactorsProfiles(models.Model):
     user = models.OneToOneField(
-        Users,
+        CharityUser,
         on_delete=models.CASCADE,
         primary_key=True,
     )
@@ -276,7 +343,7 @@ class HelperProfiles(models.Model):
     )
 
     user = models.OneToOneField(
-        Users,
+        CharityUser,
         on_delete=models.CASCADE,
         primary_key=True,
     )

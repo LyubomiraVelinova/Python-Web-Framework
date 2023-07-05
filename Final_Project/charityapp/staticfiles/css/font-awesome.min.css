@@ -930,14 +930,6 @@
     content: "\f0d1"
 }
 
-.fa-pinterest:before {
-    content: "\f0d2"
-}
-
-.fa-pinterest-square:before {
-    content: "\f0d3"
-}
-
 .fa-google-plus-square:before {
     content: "\f0d4"
 }
@@ -2224,10 +2216,6 @@
 
 .fa-facebook-official:before {
     content: "\f230"
-}
-
-.fa-pinterest-p:before {
-    content: "\f231"
 }
 
 .fa-whatsapp:before {

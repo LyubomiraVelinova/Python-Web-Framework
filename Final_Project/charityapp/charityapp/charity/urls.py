@@ -1,11 +1,11 @@
 from django.urls import path, include
 
-from charityapp.charity.views import index, charity_campaigns_details, donation_campaigns_details, user_profile, \
-    sponsor_profile, benefactor_profile, helper_profile, register_user, login_user
+from charityapp.charity.views import index, donation_campaigns_details, user_profile, \
+    sponsor_profile, benefactor_profile, helper_profile, register_user, login_user, CharityCampaignsView
 
 urlpatterns = [
     path('', index, name='home-page'),
-    path('charity/', charity_campaigns_details, name='charity-campaigns-page'),
+    path('charity/', CharityCampaignsView.as_view(), name='charity-campaigns-page'),
     path('donation/', donation_campaigns_details, name='donation-campaigns-page'),
     path('user/<int:user_id>/', include([
         path('', user_profile, name='user-profile-page'),

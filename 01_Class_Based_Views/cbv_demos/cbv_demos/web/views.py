@@ -69,22 +69,24 @@ class RedirectToArticlesView(views.RedirectView):
     url = reverse_lazy('list articles cbv')
 
 
-# class BaseView:
-#     def get(self, request):
-#         pass
-#
-#     def post(self, request):
-#         pass
-#
-#     @classmethod
-#     def as_view(cls):
-#         self = cls
-#
-#         def view(request):
-#             if request.method == 'GET':
-#                 return self.get(request)
-#
-#         return view
+class BaseView:
+    def get(self, request):
+        pass
+
+    def post(self, request):
+        pass
+
+    @classmethod
+    def as_view(cls):
+        self = cls
+
+        def view(request):
+            if request.method == 'GET':
+                return self.get(request)
+            else:
+                return self.post(request)
+
+        return view
 
 class ArticleCreateView(views.CreateView):
     model = Article

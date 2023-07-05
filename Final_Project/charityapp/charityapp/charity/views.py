@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
+from django.views import generic as views
 
-from charityapp.charity.models import CharityCampaigns, DonationCampaigns, Users, SponsorsProfiles, HelperProfiles, \
+from charityapp.charity.models import CharityCampaigns, DonationCampaigns, CharityUser, SponsorsProfiles, HelperProfiles, \
     BenefactorsProfiles
 
 
@@ -10,11 +11,19 @@ def index(request):
     return render(request, 'home-page.html')
 
 
-def charity_campaigns_details(request):
-    context = {
+# CBV
+class CharityCampaignsView(views.TemplateView):
+    template_name = 'charity-campaigns-page.html'
+    extra_context = {
         'campaigns': CharityCampaigns.objects.all(),
     }
-    return render(request, 'charity-campaigns-page.html', context)
+
+# FBV
+# def charity_campaigns_details(request):
+#     context = {
+#         'campaigns': CharityCampaigns.objects.all(),
+#     }
+#     return render(request, 'charity-campaigns-page.html', context)
 
 
 def donation_campaigns_details(request):
@@ -26,7 +35,7 @@ def donation_campaigns_details(request):
 
 def user_profile(request, user_id):
     context = {
-        'user': get_object_or_404(Users, pk=user_id),
+        'user': get_object_or_404(CharityUser, pk=user_id),
     }
     return render(request, 'user-profile-page.html', context)
 
