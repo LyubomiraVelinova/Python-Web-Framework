@@ -1,0 +1,51 @@
+.navbar-logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 5%; /* adjust the width as needed */
+    height: auto; /* maintain the aspect ratio */
+    vertical-align: middle;
+}
+
+.logo-text {
+    margin-left: 10px; /* adjust the spacing between the logo and text */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.navbar-nav {
+    display: flex;
+    align-items: self-start;
+}
+
+/*IT`S NOT DYNAMIC*/
+.nav {
+    padding-left: 200px;
+}
+
+@media (min-width: 992px) {
+    .col-md-5 {
+        width: 100%;
+    }
+}
+
+/*.navbar-logo {*/
+/*  float: left;*/
+/*}*/
+
+/*.navbar-nav {*/
+/*  display: flex;*/
+/*  justify-content: center;*/
+/*  align-items: center;*/
+/*}*/
+
+/*.navbar-nav.navbar-left {*/
+/*  flex-grow: 1;*/
+/*}*/
+
+/*.navbar-nav.navbar-right {*/
+/*  margin-left: auto;*/
+/*}*/

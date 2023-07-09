@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 
+from django.urls import reverse_lazy
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -36,7 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # My apps
-    'charityapp.charity'
+    'charityapp.charity',
+    'charityapp.user_profiles',
+    'charityapp.accounts',
+    'charityapp.common',
 ]
 
 MIDDLEWARE = [
@@ -102,6 +107,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+if DEBUG:
+    AUTH_PASSWORD_VALIDATORS = []
+
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
@@ -126,4 +134,8 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'charity.CharityUser'
+AUTH_USER_MODEL = 'user_profiles.CharityUser'
+
+LOGIN_REDIRECT_URL = reverse_lazy('home-page')
+
+LOGOUT_REDIRECT_URL = reverse_lazy('home-page')

@@ -11,10 +11,11 @@
     <title>CLUB FOR FUTURE</title>
 
     <!-- Styles -->
-    <link rel='stylesheet' href="{% static 'css/bootstrap.min.css' %}">
+    <link rel='stylesheet' href="{% static 'css/bootstrap.min2.css' %}">
     <link rel='stylesheet' href="{% static 'css/animate.min.css' %}">
     <link rel='stylesheet' href="{% static 'css/font-awesome.min.css' %}"/>
     <link rel='stylesheet' href="{% static 'css/style.css' %}"/>
+    <link rel='stylesheet' href="{% static 'css/extra-style.css' %}"/>
 
     <!-- Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Raleway:200,300,400,500,600,700,800' rel='stylesheet'
@@ -25,13 +26,10 @@
 </head>
 
 <body>
-<!-- Begin Hero Bg -->
-<div id="parallax">
-</div>
-<!-- End Hero Bg
-    ================================================== -->
+{% block hero_content %}
+{% endblock %}
 
-{% include 'base/header.html' %}
+{% include 'base/navbar.html' %}
 
 {% block main_content %}
 {% endblock %}

@@ -674,9 +674,6 @@
     content: "\f080"
 }
 
-.fa-twitter-square:before {
-    content: "\f081"
-}
 
 .fa-facebook-square:before {
     content: "\f082"
@@ -764,10 +761,6 @@
 
 .fa-phone-square:before {
     content: "\f098"
-}
-
-.fa-twitter:before {
-    content: "\f099"
 }
 
 .fa-facebook-f:before, .fa-facebook:before {
@@ -928,14 +921,6 @@
 
 .fa-truck:before {
     content: "\f0d1"
-}
-
-.fa-google-plus-square:before {
-    content: "\f0d4"
-}
-
-.fa-google-plus:before {
-    content: "\f0d5"
 }
 
 .fa-money:before {
@@ -1920,10 +1905,6 @@
 
 .fa-paragraph:before {
     content: "\f1dd"
-}
-
-.fa-sliders:before {
-    content: "\f1de"
 }
 
 .fa-share-alt:before {
