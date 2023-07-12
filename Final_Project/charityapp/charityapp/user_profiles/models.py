@@ -16,7 +16,7 @@ class ChoicesMixin:
 class ChoicesStringsMixin(ChoicesMixin):
     @classmethod
     def max_length(cls):
-        return max(len(x.name) for x in cls)
+        return max(len(x.value) for x in cls)
 
 
 class Gender(ChoicesStringsMixin, Enum):
@@ -27,8 +27,32 @@ class Gender(ChoicesStringsMixin, Enum):
 
 class UserType(ChoicesStringsMixin, Enum):
     SPONSOR = "Sponsor"
-    BENEFACTOR = "Volunteer"
-    HELPER = "Member"
+    VOLUNTEER = "Volunteer"
+    MEMBER = "Member"
+
+
+# class CareerFields(ChoicesStringsMixin, Enum):
+#     ARCHITECTURE_AND_CONSTRUCTION = "ARCHITECTURE AND CONSTRUCTION"
+#     ACCOUNTING_BANKING_AND_FINANCE = "ACCOUNTING, BANKING AND FINANCE"
+#     AGRICULTURE_FARMING_AND_FOOD = "AGRICULTURE, FARMING AND FOOD"
+#     ARTS_CULTURE_AND_ENTERTAINMENT = "ARTS, CULTURE AND ENTERTAINMENT"
+#     BUSINESS_MANAGEMENT_AND_ADMINISTRATION = "BUSINESS, MANAGEMENT AND ADMINISTRATION"
+#     COMMUNICATIONS = "COMMUNICATIONS"
+#     COMPUTER_TECHNOLOGY = "COMPUTER TECHNOLOGY"
+#     CUSTOMER_SERVICE_AND_SALES = "CUSTOMER SERVICE AND SALES"
+#     EDUCATION_AND_TRAINING = "EDUCATION AND TRAINING"
+#     ENVIRONMENT = "ENVIRONMENT"
+#     GOVERNMENT_AND_MILITARY = "GOVERNMENT AND MILITARY"
+#     HEALTH_AND_MEDICAL = "HEALTH AND MEDICAL"
+#     HOSPITALITY_TRAVEL_AND_TOURISM = "HOSPITALITY, TRAVEL AND TOURISM"
+#     INSTALLATION_MAINTENANCE_AND_REPAIR = "INSTALLATION, MAINTENANCE AND REPAIR"
+#     LAW_PUBLIC_POLICY_ENFORCEMENT_AND_SAFETY = "LAW, PUBLIC POLICY, ENFORCEMENT AND SAFETY"
+#     MANUFACTURING_AND_PRODUCTION = "MANUFACTURING AND PRODUCTION"
+#     MEDIA_AND_BROADCAST = "MEDIA AND BROADCAST"
+#     STEM = "STEM"
+#     SOCIAL_CHARITY_AND_COMMUNITY_SERVICE = "SOCIAL, CHARITY AND COMMUNITY SERVICE"
+#     TRANSPORT_AND_DISTRIBUTION = "TRANSPORT AND DISTRIBUTION"
+#     OTHER = "OTHER"
 
 
 class CharityUser(auth_models.AbstractUser):
@@ -61,13 +85,13 @@ class CharityUser(auth_models.AbstractUser):
     )
 
     gender = models.CharField(
-        max_length=Gender.max_length(),
+        max_length=MAX_LEN_NAME,
         choices=Gender.choices(),
         default=Gender.DO_NOT_SHOW,
     )
 
     user_type = models.CharField(
-        max_length=UserType.max_length(),
+        max_length=MAX_LEN_NAME,
         choices=UserType.choices(),
     )
 
@@ -81,30 +105,6 @@ class CharityUser(auth_models.AbstractUser):
     @property
     def full_name(self):
         return f"{self.first_name} {self.last_name}"
-
-
-class CareerFields(ChoicesStringsMixin, Enum):
-    AC = "Architecture and Construction"
-    ABF = "Accounting, Banking and Finance"
-    AFF = "Agriculture, Farming and Food"
-    ACE = "Arts, Culture and Entertainment"
-    BMA = "Business, Management and Administration"
-    C = "Communications"
-    CT = "Computer Technology"
-    CSS = "Customer Service and Sales"
-    ET = "Education and Training"
-    E = "Environment"
-    GM = "Government and Military"
-    HM = "Health and Medical"
-    HTT = "Hospitality, Travel and Tourism"
-    IMR = "Installation, Maintenance and Repair"
-    LPES = "Law, Public Policy, Enforcement and Safety"
-    MP = "Manufacturing and Production"
-    MB = "Media and Broadcast"
-    STEM = "STEM (Science, Technology, Engineering and Mathematics)"
-    SCC = "Social, Charity and Community Service"
-    TD = "Transport and Distribution"
-    OTHER = "Other"
 
 
 class SponsorUser(models.Model):
@@ -129,8 +129,7 @@ class SponsorUser(models.Model):
     # DO I REALLY NEED IT?
     # logo = models.ImageField(upload_to='sponsor_logos')
     career_field = models.CharField(
-        max_length=CareerFields.max_length(),
-        choices=CareerFields.choices(),
+        max_length=MAX_LEN_CAREER,
         null=True,
         blank=True,
     )

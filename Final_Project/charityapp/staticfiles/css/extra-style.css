@@ -26,10 +26,8 @@
     padding-left: 200px;
 }
 
-@media (min-width: 992px) {
-    .col-md-5 {
-        width: 100%;
-    }
+.text-justify {
+    text-align: justify;
 }
 
 /*.navbar-logo {*/

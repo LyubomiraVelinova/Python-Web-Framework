@@ -1,30 +1,64 @@
 {% extends 'base/base.html' %}
+{% load static %}
 {% load forms %}
 
 
 {% block main_content %}
-    <section id="hero" class="section">
 
-        <!-- Start Login Section-->
-        <div class="login-register-box">
-            <h1>Club for Future</h1>
-            <!-- Start Login Form-->
-            <form action="{% url 'login-user-page' %}" method="post">
-                {{ form.username|placeholder:'Enter username' }}
-                {{ form.password|placeholder:'Enter password' }}
-                <input type="hidden" value="{{ next }}" name="next">
-                {% csrf_token %}
-
-                <!-- Login Button-->
-                <button type="submit">Log in</button>
-                <!-- End Login Form -->
-            </form>
-        </div>
-        <div class="second-option">
-            <!-- Link to Register Page-->
-            <p>Don't have account? <a href="{% url 'signup-user-page' %}?next={{ next }}">Create an account</a></p>
+    <div class="login-reg-panel">
+        <div class="login-info-box">
+            <h2>Have an account?</h2>
+            <p>Lorem ipsum dolor sit amet</p>
+            <label id="label-register" for="log-reg-show">Login</label>
+            <input type="radio" name="active-log-panel" id="log-reg-show" checked="checked">
         </div>
 
-    </section>
+        <div class="register-info-box">
+            <h2>Don't have an account?</h2>
+            <p>Lorem ipsum dolor sit amet</p>
+            <label id="label-login" for="log-login-show">Register</label>
+            <input type="radio" name="active-log-panel" id="log-login-show">
+        </div>
+
+        <div class="white-panel">
+            <div class="login-show">
+                <h2>LOGIN</h2>
+                <input type="text" placeholder="Email">
+                <input type="password" placeholder="Password">
+                <input type="button" value="Login">
+                <a href="">Forgot password?</a>
+            </div>
+            <div class="register-show">
+                <h2>REGISTER</h2>
+                <input type="text" placeholder="Email">
+                <input type="password" placeholder="Password">
+                <input type="password" placeholder="Confirm Password">
+                <input type="button" value="Register">
+            </div>
+        </div>
+    </div>
+    {#    <section id="hero" class="section">#}
+    {##}
+    {#        <!-- Start Login Section-->#}
+    {#        <div class="login-register-box">#}
+    {#            <h1>Club for Future</h1>#}
+    {#            <!-- Start Login Form-->#}
+    {#            <form action="{% url 'login-user-page' %}" method="post">#}
+    {#                {{ form.username|placeholder:'Enter username' }}#}
+    {#                {{ form.password|placeholder:'Enter password' }}#}
+    {#                <input type="hidden" value="{{ next }}" name="next">#}
+    {#                {% csrf_token %}#}
+    {##}
+    {#                <!-- Login Button-->#}
+    {#                <button type="submit">Log in</button>#}
+    {#                <!-- End Login Form -->#}
+    {#            </form>#}
+    {#        </div>#}
+    {#        <div class="second-option">#}
+    {#            <!-- Link to Register Page-->#}
+    {#            <p>Don't have account? <a href="{% url 'signup-user-page' %}?next={{ next }}">Create an account</a></p>#}
+    {#        </div>#}
+    {##}
+    {#    </section>#}
 {% endblock %}
 

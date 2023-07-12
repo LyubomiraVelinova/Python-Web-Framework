@@ -1,8 +1,8 @@
 from django.urls import path, include
 
-from charityapp.charity.views import DonationCampaignsView, CharityCampaignsView
+from charityapp.charity.views import DonationListView, CampaignDetailsView
 
 urlpatterns = [
-    path('charity/', CharityCampaignsView.as_view(), name='charity-campaigns-page'),
-    path('donation/', DonationCampaignsView.as_view(), name='donation-campaigns-page'),
+    path('campaign/<int:pk>', CampaignDetailsView.as_view(), name='campaign-details-page'),
+    path('donation/', DonationListView.as_view(), name='donation-campaigns-page'),
 ]

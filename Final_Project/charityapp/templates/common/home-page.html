@@ -11,47 +11,6 @@
 
 {% block main_content %}
 
-    {#    SHOULD DELETE THIS!#}
-    {#    <!-- Start Header#}
-    {#        ================================================== -->#}
-    {#    <header id="header" class="navbar navbar-inverse navbar-fixed-top" role="banner">#}
-    {#        <div class="container">#}
-    {#            <div class="navbar-header">#}
-    {#                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">#}
-    {#                    <span class="sr-only">Toggle navigation</span>#}
-    {#                    <span class="icon-bar"></span>#}
-    {#                    <span class="icon-bar"></span>#}
-    {#                    <span class="icon-bar"></span>#}
-    {#                </button>#}
-    {#                <!-- Your Logo -->#}
-    {#                <a href="#hero" class="navbar-brand">RUN CHARITY <span class="lighter">LITE</span></a>#}
-    {#            </div>#}
-    {#            <!-- Start Navigation -->#}
-    {#            <nav class="collapse navbar-collapse bs-navbar-collapse navbar-right" role="navigation">#}
-    {#                <ul class="nav navbar-nav">#}
-    {#                    <li>#}
-    {#                        <a href="#hero">Home</a>#}
-    {#                    </li>#}
-    {#                    <li>#}
-    {#                        <a href="#about">About</a>#}
-    {#                    </li>#}
-    {#                    <li>#}
-    {#                        <a href="#gallery">Gallery</a>#}
-    {#                    </li>#}
-    {#                    <li>#}
-    {#                        <a href="#slider">Testimonials</a>#}
-    {#                    </li>#}
-    {#                    <li>#}
-    {#                        <a href="#faq">FAQ</a>#}
-    {#                    </li>#}
-    {#                    <li>#}
-    {#                        <a href="#contactarea">Contact</a>#}
-    {#                    </li>#}
-    {#                </ul>#}
-    {#            </nav>#}
-    {#        </div>#}
-    {#    </header>#}
-
     <!-- Intro
         ================================================== -->
     <section id="hero" class="section">
@@ -59,33 +18,33 @@
             <div class="row">
                 <div class="col-md-5">
                     <div class="herotext">
-                        <h1 class="wow bounceInDown" data-wow-duration="1s" data-wow-delay="0.1s">CLUB FOR <span
-                                class="lighter">FUTURE</span></h1>
-                        <p class="lead wow zoomIn" data-wow-duration="2s" data-wow-delay="0.5s">
+                        <h1 class="wow bounceInDown" data-wow-duration="1s" data-wow-delay="0.1s"><span
+                                class="lighter">CLUB FOR</span> FUTURE</h1>
+                        <p class="lead wow zoomIn text-justify" data-wow-duration="2s" data-wow-delay="0.5s">
                             TOGETHER WE CAN DO MORE!
-                            This is a titanic idea of Lazar Radkov and "Caps for the Future". We are an organization
-                            that gathers active, proactive and constructive people throughout the country regardless of
+                            We are an organization that gathers active, proactive and constructive people throughout the
+                            country regardless of
                             their gender, age, nationality, color of skin, hair, eyes, etc., race, professional
                             occupation, religious and political beliefs and convictions, as long as they comply with the
                             laws of the Republic of Bulgaria and the values of "Clubs for the Future".
                             We work so that tomorrow we can live better than today!
-                            <button class="btn btn-default btn-lg wow fadeInRight">
-                                <a href="{% url 'about-us-page' %}">Learn more about us...</a>
-                            </button>
+                            <button type="button" class="btn btn-info btn-md"><a href="{% url 'about-us-page' %}">Learn
+                                More</a></button>
                         </p>
-
                         <p>
-                            <a href="" class="btn btn-default btn-lg wow fadeInLeft" role="button"> Find a
+                            {#                            ADD IN HREF - path to causes #}
+                            <a href="#" class="btn btn-default btn-lg wow fadeInLeft"
+                               role="button"> Find a
                                 Cause </a>
                             {#                            SOME SHIT?????#}
                             <a href="{% url 'donation-campaigns-page' %}" methods="post"
                                class="btn btn-default btn-lg wow fadeInRight" role="button"> Make Donation </a>
-
                         </p>
                     </div>
                 </div>
-                <div class="col-md-7">
-                </div>
+                {#                FOR WHAT IS THIS DIV???#}
+                {#                <div class="col-md-7">#}
+                {#                </div>#}
             </div>
         </div>
     </section>
@@ -125,8 +84,9 @@
                                     Yap. Really looking goody awesome!
                                 </p>
                                 <p class="text-center">
-                                    <button type="button" class="btn btn-info btn-md"><a
-                                            href="{% url 'charity-campaigns-page' %}">Learn More</a></button>
+                                    <button type="button" class="btn btn-info btn-md">
+                                        {#                                            ADD STH IN HREF#}
+                                        <a href="#">Learn More</a></button>
                                 </p>
                             </div>
                         </div>
@@ -215,31 +175,68 @@
                             </p>
                         </div>
                     </div>
+{#                FROM HERE#}
 
-                    <div class="col-md-4">
-                        <a href="https://ununsplash.imgix.net/photo-1429277158984-614d155e0017?fit=crop&amp;fm=jpg&amp;h=700&amp;q=75&amp;w=1050"
-                           title="This is the description">
-                            <img src="https://ununsplash.imgix.net/photo-1429277158984-614d155e0017?fit=crop&amp;fm=jpg&amp;h=700&amp;q=75&amp;w=1050"
-                                 alt="" class="image-responsive">
-                            <div class="description">
-                                <span class="caption">This is <b>awesome</b></span>
-                                <span class="camera"><i class="fa fa-camera"></i></span>
-                                <div class="clearfix"></div>
+                    <div class="card-group">
+                        <div class="card">
+                            <img class="card-img-top" src="..." alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">This is a wider card with supporting text below as a natural
+                                    lead-in to additional content. This content is a little bit longer.</p>
+                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                             </div>
-                        </a>
-                    </div>
-                    <div class="col-md-4">
-                        <a href="https://unsplash.imgix.net/uploads/14115408840644deb16b0/2dc933e3?fit=crop&amp;fm=jpg&amp;h=700&amp;q=75&amp;w=1050"
-                           title="This is the description">
-                            <img src="https://unsplash.imgix.net/uploads/14115408840644deb16b0/2dc933e3?fit=crop&amp;fm=jpg&amp;h=700&amp;q=75&amp;w=1050"
-                                 alt="" class="image-responsive">
-                            <div class="description">
-                                <span class="caption">Great <b>marathon</b></span>
-                                <span class="camera"><i class="fa fa-link"></i></span>
-                                <div class="clearfix"></div>
+                        </div>
+                        <div class="card">
+                            <img class="card-img-top" src="..." alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">This card has supporting text below as a natural lead-in to
+                                    additional content.</p>
+                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                             </div>
-                        </a>
+                        </div>
+                        <div class="card">
+                            <img class="card-img-top" src="..." alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">This is a wider card with supporting text below as a natural
+                                    lead-in to additional content. This card has even longer content than the first to
+                                    show that equal height action.</p>
+                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                            </div>
+                        </div>
                     </div>
+
+{#                TO HERE #}
+
+                    {#                    {% for campaign in campaigns %}#}
+                    {#                        <div class="col-md-4">#}
+                    {#                            <a href="{% url 'campaign-details-page' campaign.pk %}" title="Learn about">#}
+                    {#                                <span>{{ campaign.name }}</span>#}
+                    {#                                <img src="{{ campaign.image }}" alt="">#}
+                    {#                                <div>#}
+                    {#                                    <span>{{ campaign.description }}</span>#}
+                    {#                                    <a href="https://www.facebook.com/events/808871124030107/?ref=newsfeed">#}
+                    {#                                        <span><i class="fa-solid fa-link fa-shake"></i></span></a>#}
+                    {#                                </div>#}
+                    {#                            </a>#}
+                    {#                        </div>#}
+                    {#                    {% endfor %}#}
+
+                    {% for campaign in campaigns %}
+                        <div class="col-md-4">
+                            <a href="https://unsplash.imgix.net/uploads/14115408840644deb16b0/2dc933e3?fit=crop&amp;fm=jpg&amp;h=700&amp;q=75&amp;w=1050"
+                               title="This is the description">
+                                <img src="{{ campaign.image }}" alt="" class="image-responsive">
+                                <div class="description">
+                                    <span class="caption">{{ campaign.name }}</span>
+                                    <span class="camera"><i class="fa fa-link"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
                     <div class="col-md-4">
                         <a href="https://ununsplash.imgix.net/photo-1429277096327-11ee3b761c93?fit=crop&amp;fm=jpg&amp;h=700&amp;q=75&amp;w=1050"
                            title="This is the description">

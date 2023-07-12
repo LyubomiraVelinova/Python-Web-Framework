@@ -2,17 +2,22 @@ from django.views import generic as views
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import user_passes_test
 
+from charityapp.charity.models import CharityCampaigns
 from charityapp.common.forms import AboutUsInfoForm
 from charityapp.common.models import AboutUsInfo
 
 
 def index(request):
-    return render(request, 'common/home-page.html')
+    campaigns = CharityCampaigns.objects.all()
+    context = {
+        'campaigns': campaigns
+    }
+    return render(request, 'common/home-page.html', context)
 
 
 # Only admins can make changes in the form info-DECORATOR IS NOT WORKING
 # @user_passes_test(lambda u: u.is_superuser)
-class AboutUsView(views.TemplateView):
+class AboutUsView(views.CreateView):
     template_name = 'common/about-us-page.html'
     form_class = AboutUsInfoForm
 

@@ -6,16 +6,12 @@ from charityapp.charity.models import CharityCampaigns, DonationCampaigns
 # Implement at least 10 web pages, where 5 of them should use class-based views.
 
 
-# CBV
-class CharityCampaignsView(views.TemplateView):
-    template_name = 'charity/campaigns-page.html'
-    extra_context = {
-        'campaigns': CharityCampaigns.objects.all(),
-    }
+class CampaignDetailsView(views.DetailView):
+    model = CharityCampaigns
+    template_name = 'charity/campaign-details-page.html'
+    context_object_name = 'campaigns'
 
 
-class DonationCampaignsView(views.TemplateView):
+class DonationListView(views.ListView):
     template_name = 'charity/donations-page.html'
-    extra_context = {
-        'campaigns': DonationCampaigns.objects.all(),
-    }
+    model = DonationCampaigns
