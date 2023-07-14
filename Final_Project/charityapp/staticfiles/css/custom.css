@@ -30,20 +30,45 @@
     text-align: justify;
 }
 
-/*.navbar-logo {*/
-/*  float: left;*/
-/*}*/
+.custom-card {
+    background-color: #fdfdfe;
+    display: flex;
+}
 
-/*.navbar-nav {*/
-/*  display: flex;*/
-/*  justify-content: center;*/
-/*  align-items: center;*/
-/*}*/
 
-/*.navbar-nav.navbar-left {*/
-/*  flex-grow: 1;*/
-/*}*/
+@media (min-width: 992px) {
+    .col-md-5.custom-col-md-5 {
+        width: 100%;
+    }
+}
 
-/*.navbar-nav.navbar-right {*/
-/*  margin-left: auto;*/
-/*}*/
+
+/*CAUSES*/
+.col-sm-4 {
+    padding: 15px;
+}
+
+.custom-card .card {
+    flex: 1;
+}
+
+#gallery .custom-card-img-top {
+    object-fit: cover;
+    height: 200px;
+}
+
+.card-body {
+    margin: 5px;
+}
+
+#gallery img:hover {
+    transform: scale(1.3);
+}
+
+
+/*ABOUT US*/
+
+/*NOT WORKING - WHY???*/
+#hero.custom-section {
+    padding: 50px;
+}

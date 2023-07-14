@@ -13,43 +13,84 @@
 
     <!-- Intro
         ================================================== -->
-    <section id="hero" class="section">
+    {#    <section id="hero" class="section">#}
+    {#        <div class="container">#}
+    {#            <div class="row">#}
+    {#                <div class="col-md-5 custom-col-md-5">#}
+    {#                    <div class="herotext">#}
+    {#                        <h1 class="wow bounceInDown" data-wow-duration="1s" data-wow-delay="0.1s"><span#}
+    {#                                class="lighter">CLUB FOR</span> FUTURE</h1>#}
+    {#                    </div>#}
+    {#                </div>#}
+    {#                FOR WHAT IS THIS DIV???#}
+    {#                <div class="col-md-7">#}
+    {#                </div>#}
+    {#            </div>#}
+    {#        </div>#}
+    {#    </section>#}
+    <!-- About
+        ================================================== -->
+    {#    ADDED BY ME #}
+    <section id="hero" class="section custom-section">
         <div class="container">
             <div class="row">
-                <div class="col-md-5">
-                    <div class="herotext">
-                        <h1 class="wow bounceInDown" data-wow-duration="1s" data-wow-delay="0.1s"><span
-                                class="lighter">CLUB FOR</span> FUTURE</h1>
-                        <p class="lead wow zoomIn text-justify" data-wow-duration="2s" data-wow-delay="0.5s">
-                            TOGETHER WE CAN DO MORE!
-                            We are an organization that gathers active, proactive and constructive people throughout the
-                            country regardless of
-                            their gender, age, nationality, color of skin, hair, eyes, etc., race, professional
-                            occupation, religious and political beliefs and convictions, as long as they comply with the
-                            laws of the Republic of Bulgaria and the values of "Clubs for the Future".
-                            We work so that tomorrow we can live better than today!
-                            <button type="button" class="btn btn-info btn-md"><a href="{% url 'about-us-page' %}">Learn
-                                More</a></button>
-                        </p>
-                        <p>
-                            {#                            ADD IN HREF - path to causes #}
-                            <a href="#" class="btn btn-default btn-lg wow fadeInLeft"
-                               role="button"> Find a
-                                Cause </a>
-                            {#                            SOME SHIT?????#}
-                            <a href="{% url 'donation-campaigns-page' %}" methods="post"
-                               class="btn btn-default btn-lg wow fadeInRight" role="button"> Make Donation </a>
-                        </p>
+                <div class="col-lg-3">
+                    <h2 class="wow bounceInDown"><span
+                            class="lighter">TOGETHER WE CAN DO</span> MORE</h2>
+                    <p class="lead text-justify">We gather active,
+                        proactive and constructive people to improve the environment in which we live.
+                        We work so that tomorrow we can live better than today!</p>
+                    <p>
+                        {#                            ADD IN HREF - path to causes #}
+                        <a href="#" class="btn btn-default btn-lg wow fadeInLeft"
+                           role="button"> Find a
+                            Cause </a>
+                        {#                            SOME SHIT?????#}
+                        <a href="{% url 'donation-campaigns-page' %}" methods="post"
+                           class="btn btn-default btn-lg wow fadeInRight" role="button"> Make Donation </a>
+                    </p>
+                </div>
+                <div class="col-lg-9">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <a href="/en-us/about-us/who-we-are/" target="_self">Who We Are</a>
+                            <p class="lead wow zoomIn text-justify" data-wow-duration="2s" data-wow-delay="0.5s">
+                                We are dedicated staff, scientists and members advancing effective, lasting conservation
+                                in more than 70 countries and territories.
+                            </p>
+                        </div>
+                        <div class="col-lg-6">
+                            <a href="/en-us/what-we-do/our-priorities/" target="_self">What We Do</a>
+                            <p class="lead wow zoomIn text-justify" data-wow-duration="2s" data-wow-delay="0.5s">
+                                To make the highest possible impact on the climate and biodiversity crises between now
+                                and 2030, we’re developing breakthrough ideas, amplifying local leaders and influencing
+                                policy.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <a href="/en-us/get-involved/how-to-help/" target="_self">How To Help</a>
+                            <p class="lead wow zoomIn text-justify" data-wow-duration="2s" data-wow-delay="0.5s">
+                                There are so many ways to make positive change for our planet. Volunteer with us. Learn
+                                how to reduce your carbon footprint. Donate to conservation work.
+                            </p>
+                        </div>
+                        <div class="col-lg-6">
+                            <a href="/en-us/about-us/where-we-work/" target="_self">Where We Work</a>
+                            <p class="lead wow zoomIn text-justify" data-wow-duration="2s" data-wow-delay="0.5s">
+                                Dense rainforests, remote coral reefs and the hearts of major cities. Our strategies are
+                                as diverse as the habitats and geographies in which we work.
+                            </p>
+                        </div>
                     </div>
                 </div>
-                {#                FOR WHAT IS THIS DIV???#}
-                {#                <div class="col-md-7">#}
-                {#                </div>#}
             </div>
         </div>
     </section>
-    <!-- About
-        ================================================== -->
+    {#    ADDED BY ME #}
+
+
     <section id="about" class="parallax section"
              style="background-image: url(http://themepush.com/demo/runcharity/assets/img/1.jpg);">
         <div class="wrapsection">
@@ -175,116 +216,44 @@
                             </p>
                         </div>
                     </div>
-{#                FROM HERE#}
 
-                    <div class="card-group">
-                        <div class="card">
-                            <img class="card-img-top" src="..." alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural
-                                    lead-in to additional content. This content is a little bit longer.</p>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    {% for campaign in campaigns %}
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="custom-card">
+                                        <div class="card">
+                                            <img class="card-img-top custom-card-img-top" src="{{ campaign.image }}"
+                                                 alt="{{ campaign.name }}">
+                                            <div class="card-body">
+                                                <h5 class="card-title ">{{ campaign.name }}</h5>
+                                                <p class="card-text">{{ campaign.resume }}</p>
+                                                <p class="card-text">
+                                                    <a href="{% url 'campaign-details-page' campaign.pk %}">
+                                                        <small class="text-muted">Learn more</small>
+                                                    </a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="card">
-                            <img class="card-img-top" src="..." alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This card has supporting text below as a natural lead-in to
-                                    additional content.</p>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <img class="card-img-top" src="..." alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural
-                                    lead-in to additional content. This card has even longer content than the first to
-                                    show that equal height action.</p>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            </div>
-                        </div>
-                    </div>
-
-{#                TO HERE #}
+                    {% endfor %}
 
                     {#                    {% for campaign in campaigns %}#}
                     {#                        <div class="col-md-4">#}
-                    {#                            <a href="{% url 'campaign-details-page' campaign.pk %}" title="Learn about">#}
-                    {#                                <span>{{ campaign.name }}</span>#}
-                    {#                                <img src="{{ campaign.image }}" alt="">#}
-                    {#                                <div>#}
-                    {#                                    <span>{{ campaign.description }}</span>#}
-                    {#                                    <a href="https://www.facebook.com/events/808871124030107/?ref=newsfeed">#}
-                    {#                                        <span><i class="fa-solid fa-link fa-shake"></i></span></a>#}
+                    {#                            <a href="https://unsplash.imgix.net/uploads/14115408840644deb16b0/2dc933e3?fit=crop&amp;fm=jpg&amp;h=700&amp;q=75&amp;w=1050"#}
+                    {#                               title="This is the description">#}
+                    {#                                <img src="{{ campaign.image }}" alt="" class="image-responsive">#}
+                    {#                                <div class="description">#}
+                    {#                                    <span class="caption">{{ campaign.name }}</span>#}
+                    {#                                    <span class="camera"><i class="fa fa-link"></i></span>#}
+                    {#                                    <div class="clearfix"></div>#}
                     {#                                </div>#}
                     {#                            </a>#}
                     {#                        </div>#}
                     {#                    {% endfor %}#}
-
-                    {% for campaign in campaigns %}
-                        <div class="col-md-4">
-                            <a href="https://unsplash.imgix.net/uploads/14115408840644deb16b0/2dc933e3?fit=crop&amp;fm=jpg&amp;h=700&amp;q=75&amp;w=1050"
-                               title="This is the description">
-                                <img src="{{ campaign.image }}" alt="" class="image-responsive">
-                                <div class="description">
-                                    <span class="caption">{{ campaign.name }}</span>
-                                    <span class="camera"><i class="fa fa-link"></i></span>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </a>
-                        </div>
-                    {% endfor %}
-                    <div class="col-md-4">
-                        <a href="https://ununsplash.imgix.net/photo-1429277096327-11ee3b761c93?fit=crop&amp;fm=jpg&amp;h=700&amp;q=75&amp;w=1050"
-                           title="This is the description">
-                            <img src="https://ununsplash.imgix.net/photo-1429277096327-11ee3b761c93?fit=crop&amp;fm=jpg&amp;h=700&amp;q=75&amp;w=1050"
-                                 alt="" class="image-responsive">
-                            <div class="description">
-                                <span class="caption">Running <b>miles</b></span>
-                                <span class="camera"><i class="fa fa-heart"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-4">
-                        <a href="https://unsplash.imgix.net/uploads/141327328038701afeede/eda0fb7c?fit=crop&amp;fm=jpg&amp;h=700&amp;q=75&amp;w=1050"
-                           title="This is the description">
-                            <img src="https://unsplash.imgix.net/uploads/141327328038701afeede/eda0fb7c?fit=crop&amp;fm=jpg&amp;h=700&amp;q=75&amp;w=1050"
-                                 alt="" class="image-responsive">
-                            <div class="description">
-                                <span class="caption">Young <b>volunteers</b></span>
-                                <span class="camera"><i class="fa fa-tachometer"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-4">
-                        <a href="https://ununsplash.imgix.net/photo-1418225043143-90858d2301b4?fit=crop&amp;fm=jpg&amp;h=700&amp;q=75&amp;w=1050"
-                           title="This is the description">
-                            <img src="https://ununsplash.imgix.net/photo-1418225043143-90858d2301b4?fit=crop&amp;fm=jpg&amp;h=700&amp;q=75&amp;w=1050"
-                                 alt="" class="image-responsive">
-                            <div class="description">
-                                <span class="caption">Charity <b>concerts</b></span>
-                                <span class="camera"><i class="fa fa-microphone"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-4">
-                        <a href="https://unsplash.imgix.net/photo-1428908799722-0a74e26ce7f6?fit=crop&amp;fm=jpg&amp;h=700&amp;q=75&amp;w=1050"
-                           title="This is the description">
-                            <img src="https://unsplash.imgix.net/photo-1428908799722-0a74e26ce7f6?fit=crop&amp;fm=jpg&amp;h=700&amp;q=75&amp;w=1050"
-                                 alt="" class="image-responsive">
-                            <div class="description">
-                                <span class="caption">Generous <b>sponsors</b></span>
-                                <span class="camera"><i class="fa fa-coffee"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
                 </div>
             </div>
         </div>
