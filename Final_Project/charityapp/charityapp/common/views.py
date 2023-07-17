@@ -15,6 +15,9 @@ def index(request):
     return render(request, 'common/home-page.html', context)
 
 
+def our_people(request):
+    return render(request, 'common/our-people.html')
+
 # Only admins can make changes in the form info-DECORATOR IS NOT WORKING
 # @user_passes_test(lambda u: u.is_superuser)
 class AboutUsView(views.CreateView):

@@ -1,68 +1,111 @@
 {% load static %}
 
-<!-- Start Header
-    ================================================== -->
-<header id="header" class="navbar navbar-inverse navbar-fixed-top" role="banner">
+<header id="header" class="navbar navbar-inverse fixed-top" role="banner">
     <div class="container">
         <div class="navbar-header">
-
-            <!-- Your Logo -->
-            <div class="navbar-logo">
-                <a href="#hero" class="navbar-brand">
-                    <img src="{% static 'images/logo.jpg' %}" alt="logo" class="logo">
-                    <span class="lighter">CLUB FOR</span><span class="logo-text"> FUTURE</span>
-                </a>
-            </div>
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
         </div>
 
-        {#Toggle button for mobile navigation#}
-        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div>
+                <a class="navbar-brand" href="#">
+                    <div class="d-flex align-items-top">
+                        <img src="{% static 'images/logo.jpg' %}" alt="Logo" width="50" height="50">
+                        <span class="lighter">CLUB FOR </span>
+                        <span class="ml-2">FUTURE</span>
+                    </div>
+                </a>
+            </div>
 
-        <!-- Start Navigation -->
-        <nav class="collapse navbar-collapse bs-navbar-collapse navbar-right" role="navigation">
-            <ul class="nav navbar-nav navbar-left">
-                <li>
-                    <a href="#hero">Home</a>
-                </li>
-                <li>
-                    <a href="#about">About</a>
-                </li>
-                <li>
-                    <a href="#gallery">Causes</a>
-                </li>
-                <li>
-                    <a href="#faq">Blog</a>
-                </li>
-                <li>
-                    <a href="#contactarea">Contact</a>
-                </li>
-            </ul>
-
-            <ul class="nav navbar-nav navbar-right">
-                {% if request.user.is_authenticated %}
-                    <!-- Link to Profile Page -->
-                    <li class="nav-item">
-                        <a href="{% url 'profile-details-page' pk=request.user.pk %}">Profile</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{% url 'logout-user-page' %}">Logout</a>
+            <div>
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropbtn">About</a>
+                        <div class="dropdown-content">
+                            <a href="#">Our mission and values</a>
+                            <a href="#">Who are we -> Our people</a>
+                            <a href="#">How we work -> Our work</a>
+                            <a href="#">Our history</a>
+                            <a href="#">Our accountability</a>
+                        </div>
                     </li>
 
-                {% else %}
-                    <li class="nav-item">
-                        <a href="{% url 'login-user-page' %}"><i class="fa-solid fa-arrow-right-to-bracket"></i> Login</a>
+                    <li class="dropdown">
+                        <a href="#about" class="dropbtn">Our work</a>
+                        <div class="dropdown-content">
+                            <a href="#">Achievements</a>
+                            <a href="#">Campaigns</a>
+                            <a href="#">Public policy</a>
+                        </div>
                     </li>
-{#                    Only when open the login#}
-{#                    <li class="nav-item">#}
-{#                        <a href="{% url 'signup-user-page' %}">Sign up</a>#}
-{#                    </li>#}
-                {% endif %}
-            </ul>
+
+                    <li class="dropdown">
+                        <a href="#gallery" class="dropbtn">Get involved</a>
+                        <div class="dropdown-content">
+                            <a href="#">Volunteers</a>
+                            <a href="#">Donators</a>
+                            <a href="#">Members</a>
+                            <a href="#">Educational resources</a>
+                            <a href="#">Report</a>
+                            <a href="#">Contact us</a>
+                        </div>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#contactarea" class="dropbtn">Membership and giving</a>
+                        <div class="dropdown-content">
+                            <a href="#">Become a member</a>
+                            <a href="#">Renew</a>
+                            <a href="#">Give monthly</a>
+                        </div>
+                    </li>
+
+                    {#                    <li>#}
+                    {#                        <a href="#about">About</a>#}
+                    {#                    </li>#}
+                    {#                    <li>#}
+                    {#                        <a href="#gallery">Gallery</a>#}
+                    {#                    </li>#}
+                    {#                    <li>#}
+                    {#                        <a href="#slider">Testimonials</a>#}
+                    {#                    </li>#}
+                    {#                    <li>#}
+                    {#                        <a href="#faq">FAQ</a>#}
+                    {#                    </li>#}
+
+                    {##}
+
+
+                    <ul class="nav navbar-nav ml-auto">
+                        {#                    NOT WORKING#}
+                        <li>
+                            <a href="#search" onclick="toggleSearchInput()"><i class="fa-solid fa-magnifying-glass"></i></a>
+                        </li>
+                        {% if request.user.is_authenticated %}
+                            <!-- Link to Profile Page -->
+                            <li class="nav-item">
+                                <a href="{% url 'profile-details-page' pk=request.user.pk %}">Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'logout-user-page' %}">Logout</a>
+                            </li>
+
+                        {% else %}
+                            <li class="nav-item">
+                                <a href="{% url 'login-user-page' %}"><i class="fa-solid fa-arrow-right-to-bracket"></i>
+                                    Login</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </ul>
+            </div>
         </nav>
     </div>
 </header>
+
+
