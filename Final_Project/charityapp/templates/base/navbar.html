@@ -1,111 +1,93 @@
 {% load static %}
 
-<header id="header" class="navbar navbar-inverse fixed-top" role="banner">
+<nav class="navbar navbar-expand-lg fixed-top bg-body-tertiary">
     <div class="container">
-        <div class="navbar-header">
-            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="{% static 'images/logo.jpg' %}" alt="Logo" width="40" height="40"
+                     class="d-inline-block align-text-top">
+                Club for Future
+            </a>
         </div>
 
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div>
-                <a class="navbar-brand" href="#">
-                    <div class="d-flex align-items-top">
-                        <img src="{% static 'images/logo.jpg' %}" alt="Logo" width="50" height="50">
-                        <span class="lighter">CLUB FOR </span>
-                        <span class="ml-2">FUTURE</span>
-                    </div>
-                </a>
-            </div>
-
-            <div>
-                <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a href="#" class="dropbtn">About</a>
-                        <div class="dropdown-content">
-                            <a href="#">Our mission and values</a>
-                            <a href="#">Who are we -> Our people</a>
-                            <a href="#">How we work -> Our work</a>
-                            <a href="#">Our history</a>
-                            <a href="#">Our accountability</a>
-                        </div>
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                            About
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Our mission and values</a></li>
+                            <li><a class="dropdown-item" href="#">Who are we -> Our people</a></li>
+                            <li><a class="dropdown-item" href="#">How we work -> Our work</a></li>
+                            <li><a class="dropdown-item" href="#">Our history</a></li>
+                            <li><a class="dropdown-item" href="#">Our accountability</a></li>
+                        </ul>
                     </li>
 
-                    <li class="dropdown">
-                        <a href="#about" class="dropbtn">Our work</a>
-                        <div class="dropdown-content">
-                            <a href="#">Achievements</a>
-                            <a href="#">Campaigns</a>
-                            <a href="#">Public policy</a>
-                        </div>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#about" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            Our work
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Achievements</a></li>
+                            <li><a class="dropdown-item" href="#">Campaigns</a></li>
+                            <li><a class="dropdown-item" href="#">Public policy</a></li>
+                        </ul>
                     </li>
 
-                    <li class="dropdown">
-                        <a href="#gallery" class="dropbtn">Get involved</a>
-                        <div class="dropdown-content">
-                            <a href="#">Volunteers</a>
-                            <a href="#">Donators</a>
-                            <a href="#">Members</a>
-                            <a href="#">Educational resources</a>
-                            <a href="#">Report</a>
-                            <a href="#">Contact us</a>
-                        </div>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#gallery" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            Get involved
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Volunteers</a></li>
+                            <li><a class="dropdown-item" href="#">Donators</a></li>
+                            <li><a class="dropdown-item" href="#">Members</a></li>
+                            <li><a class="dropdown-item" href="#">Educational resources</a></li>
+                            <li><a class="dropdown-item" href="#">Report</a></li>
+                            <li><a class="dropdown-item" href="#">Contact us</a></li>
+                        </ul>
                     </li>
 
-                    <li class="dropdown">
-                        <a href="#contactarea" class="dropbtn">Membership and giving</a>
-                        <div class="dropdown-content">
-                            <a href="#">Become a member</a>
-                            <a href="#">Renew</a>
-                            <a href="#">Give monthly</a>
-                        </div>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#contactarea" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            Membership and giving
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Become a member</a></li>
+                            <li><a class="dropdown-item" href="#">Renew</a></li>
+                            <li><a class="dropdown-item" href="#">Give monthly</a></li>
+                        </ul>
                     </li>
-
-                    {#                    <li>#}
-                    {#                        <a href="#about">About</a>#}
-                    {#                    </li>#}
-                    {#                    <li>#}
-                    {#                        <a href="#gallery">Gallery</a>#}
-                    {#                    </li>#}
-                    {#                    <li>#}
-                    {#                        <a href="#slider">Testimonials</a>#}
-                    {#                    </li>#}
-                    {#                    <li>#}
-                    {#                        <a href="#faq">FAQ</a>#}
-                    {#                    </li>#}
-
-                    {##}
-
-
-                    <ul class="nav navbar-nav ml-auto">
-                        {#                    NOT WORKING#}
-                        <li>
-                            <a href="#search" onclick="toggleSearchInput()"><i class="fa-solid fa-magnifying-glass"></i></a>
-                        </li>
-                        {% if request.user.is_authenticated %}
-                            <!-- Link to Profile Page -->
-                            <li class="nav-item">
-                                <a href="{% url 'profile-details-page' pk=request.user.pk %}">Profile</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{% url 'logout-user-page' %}">Logout</a>
-                            </li>
-
-                        {% else %}
-                            <li class="nav-item">
-                                <a href="{% url 'login-user-page' %}"><i class="fa-solid fa-arrow-right-to-bracket"></i>
-                                    Login</a>
-                            </li>
-                        {% endif %}
-                    </ul>
                 </ul>
             </div>
-        </nav>
+        </div>
+
+        <div class="container-fluid">
+            <ul class="nav navbar-nav ml-auto">
+                {% if request.user.is_authenticated %}
+                    <!-- Link to Profile Page -->
+                    <li class="nav-item">
+                        <a href="{% url 'profile-details-page' pk=request.user.pk %}">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'logout-user-page' %}">Logout</a>
+                    </li>
+
+                {% else %}
+                    <li class="nav-item">
+                        <a href="{% url 'login-user-page' %}"><i class="fa-solid fa-arrow-right-to-bracket"></i>
+                            Login</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
     </div>
-</header>
-
-
+</nav>

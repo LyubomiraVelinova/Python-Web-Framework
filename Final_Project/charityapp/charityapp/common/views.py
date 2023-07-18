@@ -18,6 +18,19 @@ def index(request):
 def our_people(request):
     return render(request, 'common/our-people.html')
 
+
+def mission_and_values(request):
+    return render(request, 'mission-and-values-page.html')
+
+
+def our_work(request):
+    return render(request, 'our-work-page.html')
+
+
+def our_history(request):
+    return render(request, 'our_history.html')
+
+
 # Only admins can make changes in the form info-DECORATOR IS NOT WORKING
 # @user_passes_test(lambda u: u.is_superuser)
 class AboutUsView(views.CreateView):
