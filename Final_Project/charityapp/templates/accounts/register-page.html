@@ -1,37 +1,71 @@
-{#TAKEN FROM PETSTAGRAM#}
-
 {% extends 'base/base.html' %}
-{% load forms %}
+{% load static %}
 
 {% block main_content %}
+    <section class="h-100 gradient-form" style="background-color: #eee;">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-xl-10">
+                    <div class="card rounded-3 text-black">
+                        <div class="row g-0">
 
-    <!-- Start Register Section -->
-    <div class="login-register-div">
-        <div class="login-register-box">
-            <h1>Club for Future</h1>
+                            <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+                                <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+                                    <h4 class="mb-4 text-uppercase">Be part of the change...</h4>
+                                    <p class="small mb-0">"You never change your life until you change something you do
+                                        daily. The secret to your success is in your daily routine."
+                                        <i>John C. Maxwell</i></p>
+                                </div>
+                            </div>
 
-            <!-- Start Register Form -->
-            <form action="{% url 'signup-user-page' %}" method="post">
-                {{ form.username|placeholder:'Enter username' }}
-                {{ form.email|placeholder:'Enter email' }}
-                {{ form.password1|placeholder:'Enter password' }}
-                {{ form.password2|placeholder:'Repeat password' }}
+                            <div class="col-lg-6">
+                                <div class="card-body p-md-5 mx-md-4">
 
-                <input type="hidden" name="next" value="{{ next }}">
+                                    <div class="text-center">
+                                        <img src="{% static 'images/logo.jpg' %}"
+                                             style="width: 150px;" alt="logo">
+                                        <h4 class="mt-1 mb-5 pb-1">Club for Future & Caps for Future</h4>
+                                    </div>
 
-                {% csrf_token %}
+                                    <form action="{% url 'register-page' %}" method="post">
+                                        <p>Please fill in your info</p>
+                                        <div class="form-outline mb-4">
+                                            {% for field in register_form %}
+                                                {% if field.field.widget.input_type != 'select' %}
+                                                    <input type="{{ field.field.widget.input_type }}"
+                                                           name="{{ field.html_name }}"
+                                                           id="id_{{ field.name }}"
+                                                           class="form-control {% if field.errors %}is-invalid{% endif %}"
+                                                           {% if field.value %}value="{{ field.value }}"{% endif %}
+                                                           {% if field.field.required %}required{% endif %}>
+                                                {% else %}
+                                                    {{ field }}
+                                                {% endif %}
+                                                <label class="form-label" for="form2Example11">{{ field.label }}</label>
+                                            {% endfor %}
+                                            <div class="text-center pt-1 mb-5 pb-1">
+                                                <a href="additional-info-page.html" class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3">
+                                                    Proceed
+                                                </a>
+                                            </div>
+                                        </div>
+                                        {% csrf_token %}
+                                        <input type="hidden" value="{{ next }}" name="next">
+                                    </form>
 
-                <!-- Register Button -->
-                <button type="submit">Register</button>
-            </form>
-            <!-- End Register Form -->
+                                    <div class="d-flex align-items-center justify-content-center pb-4">
+                                        <p class="mb-0 me-2">Already have an account?</p>
+                                        <a href="{% url 'login-page' %}">
+                                            <button type="button" class="btn btn-outline-danger">Login</button>
+                                        </a>
+                                    </div>
 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="second-option">
-
-            <!-- Link to Login Page -->
-            <p>Have an account? <a href="{% url 'login-user-page' %}">Log in</a></p>
-        </div>
-    </div>
-    <!-- End Register Section -->
+    </section>
 {% endblock %}

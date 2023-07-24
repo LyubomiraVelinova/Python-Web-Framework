@@ -3,7 +3,7 @@
 <nav class="navbar navbar-expand-lg fixed-top bg-body-tertiary">
     <div class="container">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="{% url 'home-page' %}">
                 <img src="{% static 'images/logo.jpg' %}" alt="Logo" width="40" height="40"
                      class="d-inline-block align-text-top">
                 Club for Future
@@ -16,14 +16,13 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                            aria-expanded="false">
-                            About
+                            About us
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Our mission and values</a></li>
-                            <li><a class="dropdown-item" href="#">Who are we -> Our people</a></li>
-                            <li><a class="dropdown-item" href="#">How we work -> Our work</a></li>
-                            <li><a class="dropdown-item" href="#">Our history</a></li>
-                            <li><a class="dropdown-item" href="#">Our accountability</a></li>
+                            <li><a class="dropdown-item" href="{% url 'mission_and_values-page' %}">Mission and
+                                values</a></li>
+                            <li><a class="dropdown-item" href="{% url 'who-we-are-page' %}">Who we are</a></li>
+                            <li><a class="dropdown-item" href="{% url 'history-page' %}">History</a></li>
                         </ul>
                     </li>
 
@@ -33,9 +32,11 @@
                             Our work
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Achievements</a></li>
-                            <li><a class="dropdown-item" href="#">Campaigns</a></li>
-                            <li><a class="dropdown-item" href="#">Public policy</a></li>
+                            <li><a class="dropdown-item" href="{% url 'what-we-do-page' %}">What we do</a></li>
+                            {#                            <li><a class="dropdown-item" href="#">Achievements</a></li>#}
+                            <li><a class="dropdown-item" href="{% url 'campaigns-page' %}">Campaigns</a></li>
+                            <li><a class="dropdown-item" href="{% url 'where-we-work-page' %}">Where we work</a></li>
+                            {#                            <li><a class="dropdown-item" href="#">Public policy</a></li>#}
                         </ul>
                     </li>
 
@@ -45,48 +46,48 @@
                             Get involved
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Volunteers</a></li>
-                            <li><a class="dropdown-item" href="#">Donators</a></li>
-                            <li><a class="dropdown-item" href="#">Members</a></li>
-                            <li><a class="dropdown-item" href="#">Educational resources</a></li>
-                            <li><a class="dropdown-item" href="#">Report</a></li>
+                            <li><a class="dropdown-item" href="{% url 'volunteers-page' %}">How to involve</a></li>
+                            {#                            <li><a class="dropdown-item" href="#">Educational resources</a></li>#}
+                            <li><a class="dropdown-item" href="{% url 'report-to-us' %}">Report to us</a></li>
                             <li><a class="dropdown-item" href="#">Contact us</a></li>
                         </ul>
                     </li>
 
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#contactarea" role="button"
-                           data-bs-toggle="dropdown" aria-expanded="false">
-                            Membership and giving
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Become a member</a></li>
-                            <li><a class="dropdown-item" href="#">Renew</a></li>
-                            <li><a class="dropdown-item" href="#">Give monthly</a></li>
-                        </ul>
-                    </li>
+                    {#                    <li class="nav-item dropdown">#}
+                    {#                        <a class="nav-link dropdown-toggle" href="#contactarea" role="button"#}
+                    {#                           data-bs-toggle="dropdown" aria-expanded="false">#}
+                    {#                            Membership and giving#}
+                    {#                        </a>#}
+                    {#                        <ul class="dropdown-menu">#}
+                    {#                            <li><a class="dropdown-item" href="#">Become a member</a></li>#}
+                    {#                            <li><a class="dropdown-item" href="#">Renew</a></li>#}
+                    {#                            <li><a class="dropdown-item" href="#">Give monthly</a></li>#}
+                    {#                        </ul>#}
+                    {#                    </li>#}
                 </ul>
             </div>
         </div>
 
         <div class="container-fluid">
-            <ul class="nav navbar-nav ml-auto">
+            <ul class="navbar-nav mr-auto">
                 {% if request.user.is_authenticated %}
                     <!-- Link to Profile Page -->
                     <li class="nav-item">
-                        <a href="{% url 'profile-details-page' pk=request.user.pk %}">Profile</a>
+                        <a class="nav-link" href="#">Profile</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{% url 'logout-user-page' %}">Logout</a>
+                        <a class="nav-link" href="{% url 'logout-page' %}">Logout</a>
                     </li>
 
                 {% else %}
                     <li class="nav-item">
-                        <a href="{% url 'login-user-page' %}"><i class="fa-solid fa-arrow-right-to-bracket"></i>
+                        <a class="nav-link" href="{% url 'login-page' %}"><i class="fa-solid fa-arrow-right-to-bracket"></i>
                             Login</a>
                     </li>
                 {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'donation-page' %}"><button id="donate">Donate</button></a>
+                </li>
             </ul>
         </div>
     </div>

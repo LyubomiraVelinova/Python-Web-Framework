@@ -9,22 +9,21 @@
                 <div class="col-lg-3">
                     <h2>TOGETHER WE CAN DO MORE</h2>
                     <p class="text-justify">
-                        We gather active,
-                        proactive and constructive people to improve the environment in which we live.
+                        We gather active, proactive and constructive people to improve the environment in which we live.
                         We work so that tomorrow we can live better than today!
                     </p>
                 </div>
                 <div class="col-lg-9">
                     <div class="row">
                         <div class="col-lg-6">
-                            <a href='#'>Who We Are</a>
+                            <a href='{% url 'who-we-are-page' %}'>Who We Are</a>
                             <p>
                                 We are dedicated staff, scientists and members advancing effective, lasting conservation
                                 in more than 70 countries and territories.
                             </p>
                         </div>
                         <div class="col-lg-6">
-                            <a href="#">What We Do</a>
+                            <a href="{% url 'what-we-do-page' %}">What We Do</a>
                             <p>
                                 To make the highest possible impact on the climate and biodiversity crises between now
                                 and 2030, we’re developing breakthrough ideas, amplifying local leaders and influencing
@@ -34,14 +33,14 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
-                            <a href="#">How To Help</a>
+                            <a href="{% url 'how-to-help-page' %}">How To Help</a>
                             <p>
                                 There are so many ways to make positive change for our planet. Volunteer with us. Learn
                                 how to reduce your carbon footprint. Donate to conservation work.
                             </p>
                         </div>
                         <div class="col-lg-6">
-                            <a href="#">Where We Work</a>
+                            <a href="{% url 'where-we-work-page' %}">Where We Work</a>
                             <p>
                                 Dense rainforests, remote coral reefs and the hearts of major cities. Our strategies are
                                 as diverse as the habitats and geographies in which we work.
@@ -75,7 +74,6 @@
                             Participation is everything! We are happy that the club is growing, and we are meeting
                             more and more like-minded people!
                         </p>
-                        <button type="button"><a href="#">Learn More</a></button>
                     </div>
 
                 </div>
@@ -86,7 +84,6 @@
                         <p>
                             Our sponsors are an integral part of our achievements. We owe you so much!
                         </p>
-                        <button type="button"><a href="#">Learn More</a></button>
                     </div>
 
                 </div>
@@ -98,7 +95,6 @@
                             Оur campaigns are gaining more and more popularity and succeed in uniting so many
                             people!
                         </p>
-                        <button type="button" class="btn btn-info btn-md"><a href="#">Learn More</a></button>
                     </div>
                 </div>
 
@@ -108,7 +104,6 @@
                         <p>
                             We have made hundreds of donations so far.
                         </p>
-                        <button type="button" class="btn btn-info btn-md"><a href="#">Learn More</a></button>
                     </div>
                 </div>
 
@@ -118,20 +113,21 @@
                         <p>
                             Your money saves lives and improves the environment in which we live
                         </p>
-                        <button type="button" class="btn btn-info btn-md"><a href="#">Learn More</a></button>
                     </div>
                 </div>
 
                 <div class="col-md-4 col-sm-6">
                     <div class="card h-100">
-                        <h3>$5.768 Donated</h3>
+                        <h3>$5.768 Members</h3>
                         <p>
-                            Your money saves lives and improves the environment in which we live
+                            Together we are more powerful, we can do more...
                         </p>
-                        <button type="button" class="btn btn-info btn-md"><a href="#">Learn More</a></button>
                     </div>
                 </div>
+
             </div>
+            <button type="button" class="btn btn-info btn-md"><a class="custom-btn" href="#">Learn More</a></button>
+        </div>
     </section>
 
     <!-- MISSION SECTION -->
@@ -149,9 +145,10 @@
                         </p>
                         <p>
                             <!-- {# ADD IN HREF - path to causes #} -->
-                            <a href="#" class="btn btn-default btn-lg wow fadeInLeft" role="button"> Find a
+                            <a href="{% url 'campaigns-page' %}" class="btn btn-default btn-lg wow fadeInLeft"
+                               role="button"> Find a
                                 Cause </a>
-                            <a href="{% url 'donation-campaigns-page' %}" methods="post"
+                            <a href="#" methods="post"
                                class="btn btn-default btn-lg wow fadeInRight" role="button"> Make Donation </a>
                         </p>
                     </div>
@@ -197,7 +194,8 @@
     </section>
 
     <!-- SOME WISDOM -->
-    <section class="custom-section">
+    <section id="slider" class="parallax section active-section"
+             style="background-image: url(https://images.unsplash.com/photo-1501770118606-b1d640526693?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80); background-position: 50% 384px;">
         <div class="container custom-container">
             <div class="row">
                 <div class="col-md-12">
@@ -236,6 +234,7 @@
             </div>
         </div>
     </section>
+
 
     <!-- LATEST NEWS SECTION -->
     <section class="custom-section">
@@ -425,7 +424,8 @@
     </section>
 
     <!-- SOME SECTION -->
-    <section class="custom-section">
+    <section class="custom-section"
+             style="background-image: url(https://images.unsplash.com/photo-1559027615-cd4628902d4a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1174&q=80); background-position: 50% 454px;">
         <div class="container custom-container">
             <div class="row">
                 <div class="col-md-12 sol-sm-12">
@@ -444,37 +444,35 @@
         </div>
     </section>
     <!-- CONTACT SECTION -->
-    <section class="custom-section">
+    <section id="contactarea" class="white custom-section">
         <div class="container custom-container">
             <div class="row">
                 <div class="col-md-12">
                     <div class="maintitle">
                         <h3 class="section-title">Get in Touch</h3>
                         <p class="lead">
-                            If you have questions about our events, don't hesitate to send us your message. This is
-                            a
-                            real working contact form, test it!
+                            If you have any questions about our events, thoughts about our work or just want to contact
+                            us, don't hesitate!
                         </p>
                     </div>
                     <form id="contact" name="contact" method="post" class="text-left">
                         <fieldset>
                             <div class="row">
-                                <div class="col-md-4 wow fadeIn animated animated" data-wow-delay="0.1s"
-                                     data-wow-duration="2s">
+                                <div class="col-md-12 wow fadeIn animated animated" data-wow-delay="0.1s"
+                                     data-wow-duration="2s" id="name">
                                     <label for="name">Name<span class="required">*</span></label>
                                     <input type="text" name="name" id="name" size="30" value="" required/>
                                 </div>
-                                <div class="col-md-4 wow fadeIn animated" data-wow-delay="0.3s" data-wow-duration="2s">
+                                <div class="col-md-6 wow fadeIn animated" data-wow-delay="0.3s" data-wow-duration="2s">
                                     <label for="email">Email<span class="required">*</span></label>
                                     <input type="text" name="email" id="email" size="30" value="" required/>
                                 </div>
-                                <div class="col-md-4 wow fadeIn animated" data-wow-delay="0.3s" data-wow-duration="2s">
+                                <div class="col-md-6 wow fadeIn animated" data-wow-delay="0.3s" data-wow-duration="2s">
                                     <label for="phone">Phone</label>
                                     <input type="text" name="phone" id="phone" size="30" value=""/>
                                 </div>
                             </div>
-                            <div class="wow fadeIn animated" data-wow-delay="0.3s" data-wow-duration="1.5"
-                                 style="margin-top:15px;">
+                            <div class="wow fadeIn animated" data-wow-delay="0.3s" data-wow-duration="1.5">
                                 <label for="message">Message<span class="required">*</span></label>
                                 <textarea name="message" id="message" required></textarea>
                             </div>

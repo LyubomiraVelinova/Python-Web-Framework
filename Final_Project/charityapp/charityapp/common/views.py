@@ -1,10 +1,12 @@
+from django.urls import reverse_lazy
 from django.views import generic as views
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import user_passes_test
 
-from charityapp.charity.models import CharityCampaigns
-from charityapp.common.forms import AboutUsInfoForm
-from charityapp.common.models import AboutUsInfo
+from charityapp.work.models import CharityCampaigns
+from charityapp.common.forms import AboutUsInfoForm, DonationForm, ContactInfoForm, BillingInfoForm, PaymentMethodForm, \
+    DonationValueForm
+from charityapp.common.models import AboutUsInfo, Donation
 
 
 def index(request):
@@ -15,20 +17,12 @@ def index(request):
     return render(request, 'common/home-page.html', context)
 
 
-def our_people(request):
-    return render(request, 'common/our-people.html')
-
-
-def mission_and_values(request):
-    return render(request, 'mission-and-values-page.html')
-
-
 def our_work(request):
-    return render(request, 'our-work-page.html')
+    return render(request, 'work/what-we-do.html')
 
 
-def our_history(request):
-    return render(request, 'our_history.html')
+def thank_you(request):
+    return render(request, 'common/thank-you-page.html')
 
 
 # Only admins can make changes in the form info-DECORATOR IS NOT WORKING
@@ -53,3 +47,26 @@ class AboutUsView(views.CreateView):
             context = self.get_context_data()
             context['form'] = form
             return self.render_to_response(context)
+
+
+class DonationView(views.CreateView):
+    template_name = 'common/donation-page.html'
+    form_class = DonationForm
+    success_url = reverse_lazy('thank-you-page')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = self.form_class
+        context['value_form'] = DonationValueForm()
+        context['contact_form'] = ContactInfoForm()
+        context['billing_form'] = BillingInfoForm()
+        context['payment_form'] = PaymentMethodForm()
+        return context
+
+    def form_valid(self, form):
+        # Save the form data
+        response = super().form_valid(form)
+
+        # Send notification to the user (example) - TO DO
+        # send_notification_email(self.request.user.email)
+        return response

@@ -386,3 +386,102 @@ h4 {
 }
 
 
+/* VOLUNTEERS PAGE */
+body {
+    padding-top: 50px;
+}
+
+.right-column img {
+    max-width: 100%;
+    /* Ensure the image resizes proportionally */
+}
+
+
+/* FORM */
+.white {
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    overflow: hidden;
+    z-index: 1;
+    color: #fff;
+}
+
+#contactarea form {
+    max-width: 800px;
+    margin: 0px auto;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.maintitle {
+    text-align: center;
+}
+.section-title {
+    text-transform: uppercase;
+    font-size: 30px;
+    letter-spacing: 3px;
+}
+.maintitle .lead {
+    max-width: 840px;
+    margin: 0px auto;
+    margin-bottom: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+p.lead {
+    font-size: 24px;
+    font-weight: 300;
+}
+
+#contact label {
+    text-transform: uppercase;
+    font-weight: 300;
+    letter-spacing: 2px;
+    font-size: 13px;
+    margin-top: 15px;
+}
+
+#contact input,
+#contact select,
+#contact textarea {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    width: 100%;
+    border: 0px;
+    color: rgb(37, 35, 35);
+    background-color: #fff;
+    border: 0;
+    height: 40px;
+}
+
+#contact textarea {
+    height: 180px;
+}
+
+#contact input#submit {
+    width: auto;
+    margin-top: 20px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 0;
+    color: #fff;
+    padding: 0px 20px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    #name {
+        flex: 0 0 auto;
+        width: 100%;
+    }
+}
+
+#success, #error {
+    display: none;
+}

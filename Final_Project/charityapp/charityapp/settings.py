@@ -38,10 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # My apps
-    'charityapp.charity',
+    'charityapp.work',
     'charityapp.user_profiles',
     'charityapp.accounts',
     'charityapp.common',
+    'charityapp.about',
+    'charityapp.get_involve',
+    # 'charityapp.accounts.apps.AccountsConfig',
 ]
 
 MIDDLEWARE = [
@@ -134,8 +137,20 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'user_profiles.CharityUser'
-
+# Default URL to redirect to **after successful login
 LOGIN_REDIRECT_URL = reverse_lazy('home-page')
+# Default URL to redirect to for **login**
+LOGIN_URL = reverse_lazy('login-page')
 
-LOGOUT_REDIRECT_URL = reverse_lazy('home-page')
+LOGOUT_REDIRECT_URL = reverse_lazy('login-page')
+
+AUTH_USER_MODEL = 'accounts.AppUser'
+
+# Email configurations- Fill them in
+
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = 'your@djangoapp.com'
+# EMAIL_HOST_PASSWORD = 'your password'

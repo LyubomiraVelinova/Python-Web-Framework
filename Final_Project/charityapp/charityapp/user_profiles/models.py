@@ -1,22 +1,12 @@
 from enum import Enum
 
+from django.contrib.auth import get_user_model
 from django.core import validators
 from django.db import models
-from django.contrib.auth import models as auth_models
 
-from charityapp.charity.models import DonationCampaigns, CharityCampaigns
-
-
-class ChoicesMixin:
-    @classmethod
-    def choices(cls):
-        return [(choice.name, choice.value) for choice in cls]
-
-
-class ChoicesStringsMixin(ChoicesMixin):
-    @classmethod
-    def max_length(cls):
-        return max(len(x.value) for x in cls)
+from charityapp.accounts.models import AppUser
+from charityapp.common.mixins import ChoicesStringsMixin
+from charityapp.work.models import DonationCampaigns, CharityCampaigns
 
 
 class Gender(ChoicesStringsMixin, Enum):
@@ -55,16 +45,62 @@ class UserType(ChoicesStringsMixin, Enum):
 #     OTHER = "OTHER"
 
 
-class CharityUser(auth_models.AbstractUser):
+UserModel = get_user_model()
+
+
+class SponsorProfile(models.Model):
+    MIN_LEN_NAME = 2
+    MAX_LEN_NAME = 100
+    MAX_LEN_CAREER = 100
+
+    sponsor = models.OneToOneField(
+        UserModel,
+        on_delete=models.CASCADE,
+        primary_key=True,
+        related_name='Sponsor',
+    )
+
+    company_name = models.CharField(
+        max_length=MAX_LEN_NAME,
+        null=False,
+        blank=False,
+    )
+
+    logo = models.URLField(
+        null=True,
+        blank=True,
+    )
+    # logo = models.ImageField(upload_to='sponsor_logos')
+
+    website = models.URLField()
+
+    career_field = models.CharField(
+        max_length=MAX_LEN_CAREER,
+        null=True,
+        blank=True,
+    )
+    donation_history = models.ManyToManyField(DonationCampaigns)
+
+    def __str__(self):
+        return self.company_name
+
+
+class VolunteerProfile(models.Model):
     MIN_LEN_NAME = 2
     MAX_LEN_NAME = 30
+
+    volunteer = models.OneToOneField(
+        UserModel,
+        on_delete=models.CASCADE,
+        primary_key=True,
+        related_name='Volunteer',
+    )
 
     first_name = models.CharField(
         max_length=MAX_LEN_NAME,
         validators=(
             validators.MinLengthValidator(MIN_LEN_NAME),
         ),
-        # Required field
         null=False,
         blank=False,
     )
@@ -78,21 +114,10 @@ class CharityUser(auth_models.AbstractUser):
         blank=False,
     )
 
-    email = models.EmailField(
-        unique=True,
-        null=False,
-        blank=False,
-    )
-
     gender = models.CharField(
         max_length=MAX_LEN_NAME,
         choices=Gender.choices(),
         default=Gender.DO_NOT_SHOW,
-    )
-
-    user_type = models.CharField(
-        max_length=MAX_LEN_NAME,
-        choices=UserType.choices(),
     )
 
     profile_picture = models.URLField(
@@ -100,51 +125,6 @@ class CharityUser(auth_models.AbstractUser):
         blank=True,
     )
 
-    interests = models.TextField()
-
-    @property
-    def full_name(self):
-        return f"{self.first_name} {self.last_name}"
-
-
-class SponsorUser(models.Model):
-    MAX_LEN_NAME = 100
-    MAX_LEN_CAREER = 100
-
-    sponsor = models.OneToOneField(
-        CharityUser,
-        on_delete=models.CASCADE,
-        primary_key=True,
-    )
-    company_name = models.CharField(
-        max_length=MAX_LEN_NAME,
-        null=False,
-        blank=False,
-    )
-    contact_name = models.CharField(
-        max_length=MAX_LEN_NAME,
-    )
-    contact_email = models.EmailField()
-    website = models.URLField()
-    # DO I REALLY NEED IT?
-    # logo = models.ImageField(upload_to='sponsor_logos')
-    career_field = models.CharField(
-        max_length=MAX_LEN_CAREER,
-        null=True,
-        blank=True,
-    )
-    donation_history = models.ManyToManyField(DonationCampaigns)
-
-    def __str__(self):
-        return self.company_name
-
-
-class VolunteerUser(models.Model):
-    volunteer = models.OneToOneField(
-        CharityUser,
-        on_delete=models.CASCADE,
-        primary_key=True,
-    )
     phone_number = models.IntegerField(
         null=False,
         blank=False,
@@ -153,8 +133,14 @@ class VolunteerUser(models.Model):
         null=True,
         blank=True,
     )
+    interests = models.TextField()
+
     charity_history = models.ManyToManyField(CharityCampaigns)
     donation_history = models.ManyToManyField(DonationCampaigns)
+
+    @property
+    def full_name(self):
+        return f"{self.first_name} {self.last_name}"
 
 
 class CharityInterests(ChoicesStringsMixin, Enum):
@@ -173,35 +159,73 @@ class RoleTypes(ChoicesStringsMixin, Enum):
     MODERATOR = "Moderator"
     CASHIER = "Cashier"
     PR = "Public Relations (PR)"
-    # NOT SURE ABOUT THIS???
-    VOLUNTEER = "Volunteer"
-    FIELD_VOLUNTEER = "Field volunteer"
-    MEMBER = "Member of the Club"
+    OTHER = "Other"
 
 
-class MemberUser(models.Model):
+class MemberProfile(models.Model):
+    MIN_LEN_NAME = 2
+    MAX_LEN_NAME = 30
     MAX_LENGTH_INTERESTS = 50
     MAX_LENGTH_ROLE = 50
 
     member = models.OneToOneField(
-        CharityUser,
+        UserModel,
         on_delete=models.CASCADE,
         primary_key=True,
+        related_name='Member',
     )
+
+    first_name = models.CharField(
+        max_length=MAX_LEN_NAME,
+        validators=(
+            validators.MinLengthValidator(MIN_LEN_NAME),
+        ),
+        null=False,
+        blank=False,
+    )
+
+    last_name = models.CharField(
+        max_length=MAX_LEN_NAME,
+        validators=(
+            validators.MinLengthValidator(MIN_LEN_NAME),
+        ),
+        null=False,
+        blank=False,
+    )
+
+    gender = models.CharField(
+        max_length=MAX_LEN_NAME,
+        choices=Gender.choices(),
+        default=Gender.DO_NOT_SHOW,
+    )
+
+    profile_picture = models.URLField(
+        null=True,
+        blank=True,
+    )
+
     phone_number = models.IntegerField(
         null=False,
         blank=False,
     )
+
     strengths = models.TextField(
         null=True,
         blank=True,
     )
+
     interests = models.CharField(
         max_length=CharityInterests.max_length(),
         choices=CharityInterests.choices(),
     )
+
     role = models.CharField(
         max_length=RoleTypes.max_length(),
         choices=RoleTypes.choices(),
     )
+
     contribution_history = models.ManyToManyField(CharityCampaigns)
+
+    @property
+    def full_name(self):
+        return f"{self.first_name} {self.last_name}"

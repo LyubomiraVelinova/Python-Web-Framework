@@ -1,29 +1,61 @@
-from django import views
 from django.contrib.auth import get_user_model
-from django.contrib.auth.decorators import login_required
 from django.templatetags.static import static
+from django.urls import reverse_lazy
 from django.views import generic as views
+from django.contrib.auth import mixins as auth_mixins
+
+from charityapp.user_profiles.forms import VolunteerForm, SponsorForm, MemberForm
+
 
 UserModel = get_user_model()
 
 
-class ProfileDetailsView(views.DetailView):
-    template_name = 'user_profiles/profile-details-page.html'
-    model = UserModel
+class ProfileView(views.CreateView):
+    template_name = 'accounts/additional-info-page.html'
+    form_class = None
+    success_url = reverse_lazy('home-page')
+    user_type = None
 
-    # To work provide either 'model', 'queryset' or 'get_queryset'
+    def get_form_class(self):
+        user_type = self.kwargs['user_type']
+        print(user_type)
+        if user_type == 'VOLUNTEER':
+            return VolunteerForm
+        elif user_type == 'SPONSOR':
+            return SponsorForm
+        elif user_type == 'MEMBER':
+            return MemberForm
 
     def get_context_data(self, **kwargs):
-        # NOT WORKING
-        profile_image = static('images/smile')
-
-        if self.object.profile_picture is not None:
-            profile_image = self.object.profile_picture
-
         context = super().get_context_data(**kwargs)
-        context['profile_image'] = profile_image
-
+        user_type = self.kwargs.get('user_type')
+        context['user_type'] = user_type
         return context
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        if self.form_class is not None:
+            kwargs['prefix'] = self.form_class.__name__.lower()
+        return kwargs
+
+# FOR DELETE
+# class ProfileDetailsView(views.DetailView):
+#     template_name = 'user_profiles/profile-details-page.html'
+#     model = UserModel
+#
+#     # To work provide either 'model', 'queryset' or 'get_queryset'
+#
+#     def get_context_data(self, **kwargs):
+#         # NOT WORKING
+#         profile_image = static('images/smile')
+#
+#         if self.object.profile_picture is not None:
+#             profile_image = self.object.profile_picture
+#
+#         context = super().get_context_data(**kwargs)
+#         context['profile_image'] = profile_image
+#
+#         return context
 
 
 class ProfileEditView(views.UpdateView):
@@ -32,6 +64,15 @@ class ProfileEditView(views.UpdateView):
 
 class ProfileDeleteView(views.DeleteView):
     template_name = 'user_profiles/profile-delete-page.html'
+
+
+class VolunteerListView(auth_mixins.LoginRequiredMixin, views.ListView):
+    model = UserModel
+    template_name = 'user_profiles/volunteers-list-page.html'
+
+
+
+
 
 
 # DO I REALLY NEED THIS??? AND THIS TEMPLATES???
@@ -56,3 +97,4 @@ class ProfileDeleteView(views.DeleteView):
 #         'helper': get_object_or_404(HelperProfiles, pk=helper_id)
 #     }
 #     return render(request, 'helper-profile-page.html', context)
+

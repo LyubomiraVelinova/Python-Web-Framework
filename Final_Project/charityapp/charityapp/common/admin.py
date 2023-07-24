@@ -1,8 +1,8 @@
 from django.contrib import admin
 from django.contrib.auth import get_user_model
 
-from charityapp.common.models import AboutUsInfo
-from charityapp.user_profiles.models import SponsorUser, VolunteerUser, MemberUser
+# from charityapp.common.models import AboutUsInfo
+# from charityapp.user_profiles.models import Sponsor, Volunteer, Member
 
 # UserModel = get_user_model()
 #
