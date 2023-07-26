@@ -8,9 +8,9 @@ from charityapp.common.mixins import ChoicesStringsMixin
 
 
 class UserType(ChoicesStringsMixin, Enum):
-    SPONSOR = "Sponsor"
-    VOLUNTEER = "Volunteer"
-    MEMBER = "Member"
+    SPONSOR = "SPONSOR"
+    VOLUNTEER = "VOLUNTEER"
+    MEMBER = "MEMBER"
 
 
 class AppUserManager(auth_models.BaseUserManager):
@@ -56,4 +56,6 @@ class AppUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
     user_type = models.CharField(
         max_length=UserType.max_length(),
         choices=UserType.choices(),
+        null=False,
+        blank=False,
     )

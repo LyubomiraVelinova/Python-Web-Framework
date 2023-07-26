@@ -1,65 +1,55 @@
 from django.contrib.auth import get_user_model
-from django.templatetags.static import static
-from django.urls import reverse_lazy
+from django.shortcuts import render, redirect
 from django.views import generic as views
 from django.contrib.auth import mixins as auth_mixins
 
+from charityapp.accounts.models import UserType
 from charityapp.user_profiles.forms import VolunteerForm, SponsorForm, MemberForm
 
 
 UserModel = get_user_model()
 
+# class ProfileEditView(views.UpdateView):
+#     template_name = 'user_profiles/profile-edit-page.html'
 
-class ProfileView(views.CreateView):
-    template_name = 'accounts/additional-info-page.html'
-    form_class = None
-    success_url = reverse_lazy('home-page')
-    user_type = None
 
-    def get_form_class(self):
-        user_type = self.kwargs['user_type']
-        print(user_type)
+def profile_edit_view(request):
+    user_type = request.user.user_type
+    user = request.user
+
+    if request.method == 'POST':
         if user_type == 'VOLUNTEER':
-            return VolunteerForm
+            form = VolunteerForm(request.POST, instance=user.volunteer_profile)
+            if form.is_valid():
+                form.save()
+                return redirect('home-page')
         elif user_type == 'SPONSOR':
-            return SponsorForm
+            form = SponsorForm(request.POST, instance=user.sponsor_profile)
+            if form.is_valid():
+                form.save()
+                return redirect('home-page')
         elif user_type == 'MEMBER':
-            return MemberForm
+            form = MemberForm(request.POST, instance=user.member_profile)
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        user_type = self.kwargs.get('user_type')
-        context['user_type'] = user_type
-        return context
+        if form.is_valid():
+            form.save()
+            return redirect('home-page')
 
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        if self.form_class is not None:
-            kwargs['prefix'] = self.form_class.__name__.lower()
-        return kwargs
+    elif request.method == 'GET':
+        if user_type == 'VOLUNTEER':
+            form = VolunteerForm(instance=user.volunteer_profile)
+        elif user_type == 'SPONSOR':
+            form = SponsorForm(instance=user.sponsor_profile)
+        elif user_type == 'MEMBER':
+            form = MemberForm(instance=user.member_profile)
 
-# FOR DELETE
-# class ProfileDetailsView(views.DetailView):
-#     template_name = 'user_profiles/profile-details-page.html'
-#     model = UserModel
-#
-#     # To work provide either 'model', 'queryset' or 'get_queryset'
-#
-#     def get_context_data(self, **kwargs):
-#         # NOT WORKING
-#         profile_image = static('images/smile')
-#
-#         if self.object.profile_picture is not None:
-#             profile_image = self.object.profile_picture
-#
-#         context = super().get_context_data(**kwargs)
-#         context['profile_image'] = profile_image
-#
-#         return context
+    context = {
+        'user': user,
+        'user_type': user_type,
+        'form': form,
+    }
 
-
-class ProfileEditView(views.UpdateView):
-    template_name = 'user_profiles/profile-edit-page.html'
+    return render(request, 'user_profiles/profile-edit-page.html', context)
 
 
 class ProfileDeleteView(views.DeleteView):
@@ -69,11 +59,6 @@ class ProfileDeleteView(views.DeleteView):
 class VolunteerListView(auth_mixins.LoginRequiredMixin, views.ListView):
     model = UserModel
     template_name = 'user_profiles/volunteers-list-page.html'
-
-
-
-
-
 
 # DO I REALLY NEED THIS??? AND THIS TEMPLATES???
 # @login_required
@@ -97,4 +82,3 @@ class VolunteerListView(auth_mixins.LoginRequiredMixin, views.ListView):
 #         'helper': get_object_or_404(HelperProfiles, pk=helper_id)
 #     }
 #     return render(request, 'helper-profile-page.html', context)
-

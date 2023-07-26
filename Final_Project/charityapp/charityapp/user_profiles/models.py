@@ -1,5 +1,6 @@
 from enum import Enum
 
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core import validators
 from django.db import models
@@ -13,12 +14,6 @@ class Gender(ChoicesStringsMixin, Enum):
     MALE = 'Male'
     FEMALE = 'Female'
     DO_NOT_SHOW = 'Do not show'
-
-
-class UserType(ChoicesStringsMixin, Enum):
-    SPONSOR = "Sponsor"
-    VOLUNTEER = "Volunteer"
-    MEMBER = "Member"
 
 
 # class CareerFields(ChoicesStringsMixin, Enum):
@@ -53,11 +48,11 @@ class SponsorProfile(models.Model):
     MAX_LEN_NAME = 100
     MAX_LEN_CAREER = 100
 
-    sponsor = models.OneToOneField(
+    user = models.OneToOneField(
         UserModel,
         on_delete=models.CASCADE,
+        related_name='sponsor_profile',
         primary_key=True,
-        related_name='Sponsor',
     )
 
     company_name = models.CharField(
@@ -89,11 +84,11 @@ class VolunteerProfile(models.Model):
     MIN_LEN_NAME = 2
     MAX_LEN_NAME = 30
 
-    volunteer = models.OneToOneField(
+    user = models.OneToOneField(
         UserModel,
         on_delete=models.CASCADE,
+        related_name='volunteer_profile',
         primary_key=True,
-        related_name='Volunteer',
     )
 
     first_name = models.CharField(
@@ -125,9 +120,9 @@ class VolunteerProfile(models.Model):
         blank=True,
     )
 
-    phone_number = models.IntegerField(
-        null=False,
-        blank=False,
+    phone_number = models.CharField(
+        null=True,
+        blank=True,
     )
     bio = models.TextField(
         null=True,
@@ -168,11 +163,11 @@ class MemberProfile(models.Model):
     MAX_LENGTH_INTERESTS = 50
     MAX_LENGTH_ROLE = 50
 
-    member = models.OneToOneField(
+    user = models.OneToOneField(
         UserModel,
         on_delete=models.CASCADE,
+        related_name='member_profile',
         primary_key=True,
-        related_name='Member',
     )
 
     first_name = models.CharField(
@@ -204,9 +199,9 @@ class MemberProfile(models.Model):
         blank=True,
     )
 
-    phone_number = models.IntegerField(
-        null=False,
-        blank=False,
+    phone_number = models.CharField(
+        null=True,
+        blank=True,
     )
 
     strengths = models.TextField(

@@ -148,9 +148,15 @@ AUTH_USER_MODEL = 'accounts.AppUser'
 
 # Email configurations- Fill them in
 
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_PORT = 587
-# EMAIL_USE_TLS = True
-# EMAIL_HOST_USER = 'your@djangoapp.com'
-# EMAIL_HOST_PASSWORD = 'your password'
+# Set the email backend to use SMTP for sending emails
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# SMTP server settings
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True  # Use TLS encryption for security
+# Email account credentials# Email account credentials
+EMAIL_HOST_USER = 'custom.demo.email@gmail.com'
+EMAIL_HOST_PASSWORD = 'ebhylihgrbjwgyww'
+# Email password 'qwer12345!'
+# Default email address to use for sending emails
+DEFAULT_FROM_EMAIL = 'custom.demo.email@gmail.com'

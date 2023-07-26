@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import user_passes_test
 from charityapp.work.models import CharityCampaigns
 from charityapp.common.forms import AboutUsInfoForm, DonationForm, ContactInfoForm, BillingInfoForm, PaymentMethodForm, \
     DonationValueForm
-from charityapp.common.models import AboutUsInfo, Donation
+from charityapp.common.models import AboutUsInfo
 
 
 def index(request):
@@ -21,8 +21,8 @@ def our_work(request):
     return render(request, 'work/what-we-do.html')
 
 
-def thank_you(request):
-    return render(request, 'common/thank-you-page.html')
+class DonationThankYouView(views.TemplateView):
+    template_name = 'common/donation-thank-you-page.html'
 
 
 # Only admins can make changes in the form info-DECORATOR IS NOT WORKING
@@ -52,7 +52,7 @@ class AboutUsView(views.CreateView):
 class DonationView(views.CreateView):
     template_name = 'common/donation-page.html'
     form_class = DonationForm
-    success_url = reverse_lazy('thank-you-page')
+    success_url = reverse_lazy('donation-thank-you-page')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
